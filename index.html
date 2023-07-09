@@ -55,49 +55,94 @@
         button:hover {
             background: var(--tg-theme-secondary-bg-color);
         }
+
+        #form {
+            display: none;
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            outline: none;
+            margin: 10px 5%;
+            padding: 15px 10px;
+            font-size: 14px;
+            border: 2px solid silver;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #db5d5d;
+        }
     </style>
 
     <div id="main">
         <img src="https://sun9-61.userapi.com/impg/X2TFWylRvR9a7Lpv9_GEWLKPSJt3AjM8SGG4dg/P_Nj16RZxjA.jpg?size=807x538&quality=96&sign=aa24781e7692d6213f0fb72ff835d448&c_uniq_tag=cJPy4zJ3WtWMu-x3oXs4LVCzxLR7Mmie5vMUkoA8f1g&type=none" alt="шаурма">
         <p>Шаурма 200₽ (мясо на мангале)</p>
-        <button id="buy_shaurma">Купить</button>
+        <button id="buy">Купить</button>
     </div>
 
     <div id="main">
         <img src="https://sun9-35.userapi.com/impg/RLgtJXArRZ9vHe87MXlDpSozI_xAAm9TrNwpzQ/Uidp8ZKdEBU.jpg?size=700x525&quality=96&sign=9e1990eb5ae86196fe42e3386b045bf3&c_uniq_tag=2k4I2x6mw9tP0vjnSd9qFISTbp4_V6GNjRzaRjwkXJ4&type=none" alt="донер">
         <p>Донер 200₽ (мясо на мангале)</p>
-        <button id="buy_doner">Купить</button>
+        <button id="buy">Купить</button>
     </div>
 
     <div id="main">
         <img src="https://sun9-69.userapi.com/impg/cPxnFTXMoDR7fwbNVPO0khRGiNMlw80yxfdEBw/8iefyJu4rmI.jpg?size=620x415&quality=96&sign=b76ca5122a65f3d6792477dc47685c90&c_uniq_tag=Mx6Xw1Zv0Hden4cmGaMuA4DLaY1Vk58onDY7iv7yiIM&type=none" alt="самса">
         <p>Самса 100₽ (Говядина лук)</p>
-        <button id="buy_samsa">Купить</button>
+        <button id="buy">Купить</button>
     </div>
 
     <div id="main">
         <img src="https://sun9-49.userapi.com/hIYp6k8Q4l1f0CoD116jqIJi6L4VZmihWgwziw/zn_G7DsXSyg.jpg" alt="Картофель фри">
         <p>Картофель фри 120₽ (100г)</p>
-        <button id="buy_kartofelfree100">Купить</button>
+        <button id="buy">Купить</button>
     </div>
 
     <div id="main">
         <img src="https://sun9-16.userapi.com/impg/hiwPKr9c5nDDgzOvPSgJ2YcRkx7EjW4NuG0z7g/fSgSPUN6L_U.jpg?size=807x605&quality=96&sign=dc63b5b933feb4204344a9255957ea16&c_uniq_tag=qhoDJdC3mMMfVDmdC4EngguwdMonANqPW7W69376H5U&type=none" alt="Картофель фри">
         <p>Картофель фри 230₽ (200г)</p>
-        <button id="buy_kartofelfree200">Купить</button>
+        <button id="buy">Купить</button>
     </div>
 
     <div id="main">
         <img src="https://sun9-43.userapi.com/impg/aOcnFkYaZazb_NRy-oHZdvwvFO1rhvVDd_EbgQ/FpjzBTxusrM.jpg?size=580x387&quality=96&sign=b75d35681ea82f6cb49fc54d78ff9a6b&c_uniq_tag=tQtTIwHVGVJQxAu5NSTsiqQh6INQ3ZjB4dEDSX3GB4Q&type=none" alt="Наггетсы">
         <p>Наггетсы 230₽ (10шт)</p>
-        <button id="buy_nagets10">Купить</button>
+        <button id="buy">Купить</button>
     </div>
     
     <div id="main">
         <img src="https://sun9-61.userapi.com/impg/y2Znb3u9r0hcaMZb2AVbDQte87nuCvXupaTJSw/qW-VVwlG5Ms.jpg?size=807x538&quality=96&sign=aceb5b7e4afefe688a1c1100095c9e80&c_uniq_tag=4OUYIVE-xD_zk1KG3jJY6cBO6gpOqbAUvyMEtNOy-b0&type=none" alt="Наггетсы">
         <p>Наггетсы 120₽ (5шт)</p>
-        <button id="buy_nagets5">Купить</button>
+        <button id="buy">Купить</button>
     </div>
+
+    <form id="form">
+        <input type="text" placeholder="Имя" id="user_name">
+        <input type="text" placeholder="Телефон" id="user_phone">
+        <button id="order">Перейти к оформлению заказа</button>
+    </form>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+
+        let buy = document.getElementById('buy');
+
+        let order = document.getElementById('order');
+
+        buy.addEventListener("click", () => {
+            document.getElementById('main').style.display = "none";
+            document.getElementById('form').style.display = "block";
+            document.getElementById('user_name').value = tg.initDataUnsafe.user.first_name;
+        })
+
+        order.addEventListener("click", () => {
+            tg.close();
+        })
+
+    </script>
 </body>
 </html>
